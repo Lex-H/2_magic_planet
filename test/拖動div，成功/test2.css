@@ -1,7 +1,12 @@
-#p01 {
+html {
+    /* 禁止反白文字，none = 元素及其子元素的文本不可选中。 */
+   user-select: none; 
+}
+
+#p01, #imgDiv {
     position: absolute;
 }
 
-#imgDiv {
-    position: absolute;
+#p01 {
+    left: 500px;
 }

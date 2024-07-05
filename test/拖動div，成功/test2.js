@@ -1,10 +1,3 @@
-// $('p').css("border", "1px solid #000")
-
-// kkk = document.getElementById("p01");
-// kkk.addEventListener("click", function(){
-//     document.getElementById("p01").innerHTML = "Hello World";
-// });
-
 xxx = document.getElementById("imgDiv");
 
 xxx.addEventListener("mousedown", function(divEvent){
@@ -16,7 +9,7 @@ xxx.addEventListener("mousedown", function(divEvent){
     xxx.onmouseup = function(){
         document.onmousemove = null;
     }
-
+    // 原作者說為避免bug所以多做一次 null
     document.onmouseup = function(){
         document.onmousemove = null;
     }
@@ -24,7 +17,7 @@ xxx.addEventListener("mousedown", function(divEvent){
 )
 
 
-
+// 以下是從網路上抄有三個bug的原始碼
 // $("#imgDiv").addEventListener("mousedown", function(divEvent){
 //     document.onmousemove = function(ev){
 //         $("#imgDiv").style.left = ev.clientX - divEvent.offsetX + "px";
