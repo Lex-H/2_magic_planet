@@ -8,10 +8,10 @@
 </head>
 <body>
     <div id="canvas" class="absolute">
-        <div class="card absolute">
+        <div id="card_1" class="card absolute" draggable="false">
             <div class="cardBorder"></div>
             <div>
-                <img class="cardPic absolute" src="img/card/1.png" alt="">
+                <img class="cardPic absolute" draggable="false" src="img/card/1.png">
             </div>
             <div class="description">
                 <p>吸引目標及相鄰的召喚物<br>
@@ -19,21 +19,23 @@
                 </p>
             </div>
             <div class="cardName textCenterHorizontally">
-                <img class="cardNamePic absolute" src="img/card/2.png" alt="">
+                <img class="cardNamePic absolute" src="img/card/2.png" draggable="false">
                 <div class="cardNameText">
                     重力球
                 </div>
             </div>
             <div class="mana">
-                <img class="manaPic absolute" src="img/card/mana.png" alt="">
+                <img class="manaPic absolute" src="img/card/mana.png" draggable="false">
                 <div class="manaText">1</div>
             </div>
             <div class="cardType">
-                <img class="cardTypePic absolute" src="img/card/mana.png" alt="">
+                <img class="cardTypePic absolute" src="img/card/mana.png" draggable="false">
                 <div class="cardTypeText">法</div>
             </div>
             <div class="cardBack"></div>
         </div>
     </div>
+    <!-- 要操作DOM所以放在最後一行 -->
+    <script src="index.js"></script>
 </body>
 </html>

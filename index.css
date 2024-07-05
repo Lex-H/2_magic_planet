@@ -5,6 +5,9 @@ body {
     margin: 0;
     height: 100vh;
     background-color: #f1ff88;
+
+    /* 禁止反白文字，none = 元素及其子元素的文本不可选中。 */
+    user-select: none; 
 }
 
 #canvas {
@@ -13,17 +16,13 @@ body {
     background-color: #333333;
 }
 
-.absolute {
-    position: absolute;
-}
-
-.card div {
+.absolute, .card div {
     position: absolute;
 }
 
 .card {
-    top: 20%;
-    left: 20%;
+    top: 50px;
+    left: 50px;
 }
 
 .cardBack {
