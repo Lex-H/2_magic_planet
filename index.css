@@ -1,0 +1,110 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    background-color: #f1ff88;
+}
+
+#canvas {
+    width: 90vw;
+    height: 41.54vw;
+    background-color: #333333;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.card div {
+    position: absolute;
+}
+
+.card {
+    top: 20%;
+    left: 20%;
+}
+
+.cardBack {
+    width: 0;
+    height: 0;
+    margin: 0;
+    /* 先隱藏，要用的時候使用JS調用 */
+}
+
+.cardBorder {
+    width: 10vw;
+    height: 16vw;
+    border-radius: 5%;
+    border: solid 0.15vw #008314;
+    background-color: #7aff8e;
+}
+
+.cardPic {
+    left: 1.25vw;
+    top: 1.25vw;
+    width: 7.5vw;
+    border: solid 0.15vw #008314;
+}
+
+.description {
+    left: 1.25vw;
+    width: 7.5vw;
+    top: 8.5vw;
+    height: 6vw;
+    background-color: aqua;
+    border: solid 0.15vw rgb(0, 147, 147);
+    
+}
+
+.description > p {
+    padding: 0.5vw;
+    font-size:x-small;
+}
+
+.textCenterHorizontally {
+    text-align: center;
+}
+
+.cardNamePic {
+    left: 0.5vw;
+    top: 6.5vw;
+    width: 9vw;
+    height: 3vw;
+}
+
+.cardNameText {
+    left: 1vw;
+    top: 7.25vw;
+    width: 8vw;
+    font-weight: bold;
+}
+
+.manaPic {
+    left: -1vw;
+    top: -1vw;
+    width: 3.5vw;
+}
+
+.manaText {
+    left: 0.3vw;
+    top: -0.1vw;
+    font-size:x-large;
+    font-weight: bold;
+
+}
+
+.cardTypePic {
+    left: 7.5vw;
+    top: -1vw;
+    width: 3.5vw;
+}
+
+.cardTypeText {
+    left: 8.5vw;
+    top: -0.2vw;
+    font-size:x-large;
+    font-weight: bold;
+
+}
