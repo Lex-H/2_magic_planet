@@ -1,12 +1,14 @@
-xxx = document.getElementById("card_1");
+// 拖動div，成功，原始碼來自網路
 
-xxx.addEventListener("mousedown", function(divEvent){
+itemDragged = document.getElementById("card_1");
+
+itemDragged.addEventListener("mousedown", function(divEvent){
     document.onmousemove = function(ev){
-        xxx.style.left = ev.clientX - divEvent.offsetX + "px";
-        xxx.style.top = ev.clientY - divEvent.offsetY + "px";
+        itemDragged.style.left = ev.clientX - divEvent.offsetX + "px";
+        itemDragged.style.top = ev.clientY - divEvent.offsetY + "px";
     }
 
-    xxx.onmouseup = function(){
+    itemDragged.onmouseup = function(){
         document.onmousemove = null;
     }
     // 原作者說為避免bug所以多做一次 null

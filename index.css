@@ -1,9 +1,8 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 100vh;
+    /* 不要使用 flex+justify-content: center 水平置中
+    不要使用 align-items: center; 垂直置中 
+    因為會導致其他地方意外的Bug，例如拖動div的漂移bug */
+    
     background-color: #f1ff88;
 
     /* 禁止反白文字，none = 元素及其子元素的文本不可选中。 */
@@ -11,6 +10,8 @@ body {
 }
 
 #canvas {
+    /* 利用設定div本身的寬度及margin左右auto讓div水平置中 */
+    margin: 0 auto;
     width: 90vw;
     height: 41.54vw;
     background-color: #333333;
@@ -21,8 +22,8 @@ body {
 }
 
 .card {
-    top: 50px;
-    left: 50px;
+    top: 20%;
+    left: 20%;
 }
 
 .cardBack {
@@ -49,8 +50,8 @@ body {
 
 .description {
     left: 1.25vw;
-    width: 7.5vw;
     top: 8.5vw;
+    width: 7.5vw;
     height: 6vw;
     background-color: aqua;
     border: solid 0.15vw rgb(0, 147, 147);
@@ -81,29 +82,38 @@ body {
 }
 
 .manaPic {
-    left: -1vw;
-    top: -1vw;
+    left: 0;
+    top: -0.4vw;
     width: 3.5vw;
 }
 
 .manaText {
-    left: 0.3vw;
-    top: -0.1vw;
+    left: 1.3vw;
+    top: 0.5vw;
     font-size:x-large;
     font-weight: bold;
 
 }
 
 .cardTypePic {
-    left: 7.5vw;
-    top: -1vw;
+    left: 6.9vw;
+    top: -0.4vw;
     width: 3.5vw;
 }
 
 .cardTypeText {
-    left: 8.5vw;
-    top: -0.2vw;
+    left: 7.85vw;
+    top: 0.3vw;
     font-size:x-large;
     font-weight: bold;
 
+}
+
+#clearTrigger {
+    left: 0;
+    top: 0;
+    width: 10.5vw;
+    height: 16.5vw;
+    /* bgc用來測試是否完全覆蓋要拖動的div */
+    /* background-color: #e80202; */
 }

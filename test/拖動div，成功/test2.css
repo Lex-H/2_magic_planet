@@ -31,7 +31,10 @@ html {
 }
 
 #clearTrigger {
+    left: 0;
+    top: 0;
     width: 400px;
     height: 600px;
+    /* bgc用來測試是否完全覆蓋要拖動的div */
     /* background-color: #e80202; */
 }
