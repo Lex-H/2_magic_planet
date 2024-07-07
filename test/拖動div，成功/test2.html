@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>拖動div，成功，原始碼來自網路</title>
     <link rel="stylesheet" href="test2.css">
 </head>
 <body>
-    <p id="p01" draggable="false">test 2</p>
+    拖動div，成功，原始碼來自網路
+    <p id="p01" class="absolute" draggable="false">test 2</p>
     <!-- draggable="false"禁用處理器原生的拖曳避免bug。 -->
-    <div id="imgDiv">
+    <div id="imgDiv" class="absolute">
         <img id="img"
         src="../../img/CardBack.png"
         draggable="false"
+        class="absolute"
         >
+        <img id="img2"
+        class="absolute"
+        src="../../img/卡片設計稿.png"
+        draggable="false"
+        >
+        <div id="divText" class="absolute">圖片介紹</div>
+        <!-- 這個clearTrigger很重要，要放在想拖動的div裡面最底下，因為想拖動的div裡面任何東西使用absolute+left or top修改位置後，這個組件會有飄移bug，使用clearTrigger阻擋點擊到那些修改位置的組件 -->
+        <div id="clearTrigger" class="absolute"></div>
     </div>
     <script src="test2.js"></script>
 </body>

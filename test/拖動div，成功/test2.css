@@ -1,12 +1,37 @@
+/* 拖動div，成功，原始碼來自網路 */
+
 html {
     /* 禁止反白文字，none = 元素及其子元素的文本不可选中。 */
    user-select: none; 
 }
 
-#p01, #imgDiv {
+/* 要拖動的div要設定absolute */
+.absolute {
     position: absolute;
 }
 
 #p01 {
     left: 500px;
+}
+
+#img2 {
+    left: 0;
+    top: 200px;
+    width: 400px;
+}
+
+#img {
+    left: 0;
+    top: 0;
+}
+
+#divText {
+    left: 100px;
+    top: 100px;
+}
+
+#clearTrigger {
+    width: 400px;
+    height: 600px;
+    /* background-color: #e80202; */
 }
