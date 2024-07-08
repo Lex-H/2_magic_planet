@@ -1,4 +1,4 @@
-編號,種類,等級,名稱,圖片,圖片檔案名稱,敘述,說明,花費(能量水晶),攻擊,血量,進化,備註
+number,type,class,name,picDescription,picName,description,explanation,cost,attack,health,evolution,remark
 1,角色,傳說,千葉櫻 ,身穿性感氣質禮服的年輕美女,,"第一偵查小隊「預言」的攻擊手
 精通各種武器及格鬥技術
 太陽系無限制武器單挑賽冠軍
