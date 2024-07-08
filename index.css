@@ -21,11 +21,6 @@ body {
     position: absolute;
 }
 
-.card {
-    top: 20%;
-    left: 20%;
-}
-
 .cardBack {
     width: 0;
     height: 0;
@@ -116,4 +111,14 @@ body {
     height: 16.5vw;
     /* bgc用來測試是否完全覆蓋要拖動的div */
     /* background-color: #e80202; */
+}
+
+#card_1 {
+    top: 20%;
+    left: 20%;
+}
+
+#card_2 {
+    top: 40%;
+    left: 40%;
 }
