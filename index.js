@@ -17,3 +17,27 @@ itemDragged.addEventListener("mousedown", function(divEvent){
     }
 }
 )
+
+
+// 從output.json讀取卡片資料
+// fetch("parseCsv/output.json")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (myJson) {
+//     console.log(myJson);
+//   });
+
+fetch("parseCsv/output.json")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (myJson) {
+    console.log(myJson);
+    const csvJson = myJson;
+    // csvJson就是卡片資料陣列，在這邊使用吧。
+    // 因為非同步？的關係，只能在這裡調用，就算宣告成全域變數，在這之外的代碼直接調動不一定生效，因為非同步？還沒跑完
+    // 或者是將csvJson設定為全域變數(不加const)，然後後面要用到的地方設定計時器，網頁載入兩三秒後再讀取
+    var el = document.getElementById("testCsv");
+    el.innerHTML = "<h1>"+csvJson[0].名稱+"</h1>";
+  });
