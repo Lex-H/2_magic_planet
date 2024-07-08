@@ -20,8 +20,8 @@ function dragItem(itemID) {
     )
 }
 
-// 設定card_1拖動div事件
-dragItem('card_1');
+// 設定card_model拖動div事件
+dragItem('card_model');
 
 
 
@@ -36,9 +36,6 @@ fetch("parseCsv/output.json")
     // csvJson就是卡片資料陣列，在這邊使用吧。
     // 因為非同步？的關係，只能在這裡調用，就算宣告成全域變數，在這之外的代碼直接調動不一定生效，因為非同步？還沒跑完
     // 或者是將csvJson設定為全域變數(不加const)，然後後面要用到的地方設定計時器，網頁載入兩三秒後再讀取
-
-    // 選取要當作基底取代的div
-    var cardS = document.getElementById("cardS");
 
     // 卡片產生函數：輸入卡片編號產生卡片
     function cardGenerator(number) {
@@ -73,17 +70,25 @@ fetch("parseCsv/output.json")
                 '<!-- 這個clearTrigger很重要，要放在想拖動的div裡面最底下，因為想拖動的div裡面任何東西使用absolute+left or top修改位置後，這個組件會有飄移bug，使用clearTrigger阻擋點擊到那些修改位置的組件 -->'+
                 '<div id="clearTrigger" class="absolute"></div>'+
             '</div>';
-    // 將cardS使用outerHTML完全替換成我指定的模板 
-    cardS.outerHTML = cardTemplate;
+
+    // 產生新的div
+    let newDiv = document.createElement("div");
+
+    // 將newDiv放到canvas裡面
+    document.getElementById('canvas').appendChild(newDiv);
+
+    // 將newDiv使用outerHTML完全替換成我指定的模板 
+    newDiv.outerHTML = cardTemplate;
     
-    // 設定card_1拖動div事件
+    // 設定card_model拖動div事件
     dragItem(divId);
     }
 
     // 用函數產生卡片
     cardGenerator(2); // 先不要用1，會跟舊的ID重複
-    // cardGenerator(3);
-    // cardGenerator(4);
-    // cardGenerator(5);
-    // cardGenerator(6);
+    cardGenerator(3);
+    cardGenerator(4);
+    cardGenerator(5);
+    cardGenerator(6);
+    cardGenerator(7);
   });
