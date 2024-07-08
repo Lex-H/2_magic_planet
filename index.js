@@ -81,10 +81,9 @@ fetch("parseCsv/output.json")
     }
 
     // 用函數產生卡片
-    cardGenerator(1);
-    cardGenerator(2);
-    cardGenerator(3);
-    cardGenerator(4);
-    cardGenerator(5);
-    cardGenerator(6);
+    cardGenerator(2); // 先不要用1，會跟舊的ID重複
+    // cardGenerator(3);
+    // cardGenerator(4);
+    // cardGenerator(5);
+    // cardGenerator(6);
   });
