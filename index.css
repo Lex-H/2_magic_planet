@@ -1,14 +1,23 @@
-body {
-    /* 不要使用 flex+justify-content: center 水平置中
+/* 
+    canvas及以上節點
+    不要使用 flex+justify-content: center 水平置中
     不要使用 align-items: center; 垂直置中 
-    因為會導致其他地方意外的Bug，例如拖動div的漂移bug */
-    
+    不要設定position
+    因為會導致其他地方意外的Bug，例如拖動div的漂移bug
+    */
+body {
     background-color: #f1ff88;
-
     /* 禁止反白文字，none = 元素及其子元素的文本不可选中。 */
     user-select: none; 
 }
 
+/* 
+    canvas及以上節點
+    不要使用 flex+justify-content: center 水平置中
+    不要使用 align-items: center; 垂直置中 
+    不要設定position
+    因為會導致其他地方意外的Bug，例如拖動div的漂移bug
+*/
 #canvas {
     /* 利用設定div本身的寬度及margin左右auto讓div水平置中 */
     margin: 0 auto;
@@ -115,5 +124,10 @@ body {
 
 #card_model {
     top: 30%;
-    left: 50%;
+    left: 30%;
+}
+
+#buttonToggleFullScreen {
+    right: 6vw;
+    bottom: 3vw;
 }

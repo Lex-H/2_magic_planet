@@ -1,3 +1,13 @@
+// canvas置中函數：bodyTop設定高度，讓canvas垂直置中
+function canvasMidVertically() {
+    let clientHeight = document.documentElement.scrollHeight; // 頁面高度
+    let canvas = document.getElementById("canvas");
+    let bodyIop = document.getElementById("bodyTop");
+    let canvasHeight = canvas.offsetHeight; // canvas高度
+    bodyIop.style.height = (clientHeight-canvasHeight)/2+"px"; // 設定bodyTop高度
+}
+canvasMidVertically()
+
 // 拖動div事件函數，輸入字串形式的div之ID
 function dragItem(itemID) {
     // 拖動div，成功，原始碼來自網路
@@ -85,10 +95,56 @@ fetch("parseCsv/output.json")
     }
 
     // 用函數產生卡片
-    cardGenerator(2); // 先不要用1，會跟舊的ID重複
+    cardGenerator(1);
+    cardGenerator(2);
     cardGenerator(3);
     cardGenerator(4);
     cardGenerator(5);
     cardGenerator(6);
     cardGenerator(7);
   });
+
+
+
+// 切換全螢幕
+function toggleFullScreen() {
+    if (
+      !document.fullscreenElement && // alternative standard method
+      !document.mozFullScreenElement &&
+      !document.webkitFullscreenElement &&
+      !document.msFullscreenElement
+    ) {
+      // current working methods
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(
+          Element.ALLOW_KEYBOARD_INPUT,
+        );
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+}
+
+let buttonToggleFullScreen = document.getElementById("buttonToggleFullScreen");
+buttonToggleFullScreen.addEventListener(
+    "click",
+    function () {
+        toggleFullScreen();
+    },
+);
+// 設定事件，螢幕切換後必須重新置中canvas
+document.addEventListener("fullscreenchange", canvasMidVertically);
