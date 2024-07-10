@@ -1,3 +1,27 @@
+const canvas = document.getElementById("canvas");
+canvas.width = window.innerWidth*0.9; // 畫布寬 = 視窗內的寬
+canvas.height = window.innerWidth*0.4154; // 畫布高 = 視窗內的高
+
+// 繪製圖案函數
+function draw() {
+  const canvas = document.getElementById("canvas");
+  if (canvas.getContext) {
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "rgb(200 0 0)";
+    ctx.fillRect(10, 10, 50, 50);
+
+    ctx.fillStyle = "rgb(0 0 200 / 50%)";
+    ctx.fillRect(30, 30, 50, 50);
+
+
+    ctx.fillRect(25, 25, 100, 100);
+    ctx.clearRect(45, 45, 60, 60);
+    ctx.strokeRect(50, 50, 50, 50);
+  }
+}
+draw(); 
+
 // canvas置中函數：bodyTop設定高度，讓canvas垂直置中
 function canvasMidVertically() {
     let clientHeight = document.documentElement.scrollHeight; // 頁面高度
@@ -84,8 +108,8 @@ fetch("parseCsv/output.json")
     // 產生新的div
     let newDiv = document.createElement("div");
 
-    // 將newDiv放到canvas裡面
-    document.getElementById('canvas').appendChild(newDiv);
+    // 將newDiv放到canvasDiv裡面
+    document.getElementById('canvasDiv').appendChild(newDiv);
 
     // 將newDiv使用outerHTML完全替換成我指定的模板 
     newDiv.outerHTML = cardTemplate;
