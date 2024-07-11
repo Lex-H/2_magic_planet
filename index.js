@@ -1,36 +1,48 @@
-const canvas = document.getElementById("canvas");
-canvas.width = window.innerWidth*0.9; // 畫布寬 = 視窗內的寬
-canvas.height = window.innerWidth*0.4154; // 畫布高 = 視窗內的高
+// --------準備所需物件及函數--------
 
-// 繪製圖案函數
-function draw() {
-  const canvas = document.getElementById("canvas");
-  if (canvas.getContext) {
-    const ctx = canvas.getContext("2d");
+// initGame物件：初始化遊戲
+const initGame = {
+  canvas: document.getElementById("canvas"),
 
-    ctx.fillStyle = "rgb(200 0 0)";
-    ctx.fillRect(10, 10, 50, 50);
-
-    ctx.fillStyle = "rgb(0 0 200 / 50%)";
-    ctx.fillRect(30, 30, 50, 50);
-
-
-    ctx.fillRect(25, 25, 100, 100);
-    ctx.clearRect(45, 45, 60, 60);
-    ctx.strokeRect(50, 50, 50, 50);
-  }
-}
-draw(); 
-
-// canvas置中函數：bodyTop設定高度，讓canvas垂直置中
-function canvasMidVertically() {
+  // canvas置中函數：bodyTop設定高度，讓canvas垂直置中
+  canvasMidVertically: function() {
     let clientHeight = document.documentElement.scrollHeight; // 頁面高度
     let canvas = document.getElementById("canvas");
     let bodyIop = document.getElementById("bodyTop");
     let canvasHeight = canvas.offsetHeight; // canvas高度
     bodyIop.style.height = (clientHeight-canvasHeight)/2+"px"; // 設定bodyTop高度
+  },
+
+  init: function() {
+    canvas.width = window.innerWidth*0.9; // 畫布寬 = 視窗內的寬
+    canvas.height = window.innerWidth*0.4154; // 畫布高 = 視窗內的高
+    this.canvasMidVertically(); // 讓canvas垂直置中
+  },
 }
-canvasMidVertically()
+
+
+
+// 繪製圖案函數範本
+function draw() {
+  const canvas = document.getElementById("canvas");
+  if (canvas.getContext) {
+    const ctx = canvas.getContext("2d");
+
+    // ctx.fillStyle = "rgb(200 0 0)";
+    // ctx.fillRect(10, 10, 50, 50);
+
+    // ctx.fillStyle = "rgb(0 0 200 / 50%)";
+    // ctx.fillRect(30, 30, 50, 50);
+
+
+    // ctx.fillRect(25, 25, 100, 100);
+    // ctx.clearRect(45, 45, 60, 60);
+    // ctx.strokeRect(50, 50, 50, 50);
+  }
+}
+
+
+
 
 // 拖動div事件函數，輸入字串形式的div之ID
 function dragItem(itemID) {
@@ -53,9 +65,6 @@ function dragItem(itemID) {
     }
     )
 }
-
-// 設定card_model拖動div事件
-dragItem('card_model');
 
 
 
@@ -130,7 +139,7 @@ fetch("parseCsv/output.json")
 
 
 
-// 切換全螢幕
+// 切換全螢幕函數
 function toggleFullScreen() {
     if (
       !document.fullscreenElement && // alternative standard method
@@ -163,6 +172,30 @@ function toggleFullScreen() {
     }
 }
 
+
+
+// 開始畫面物件
+// 應該包含清除canvas，設定場景，設定按鈕
+const openingScene = {
+
+}
+
+
+
+// --------運行遊戲--------
+
+initGame.init(); // 初始化
+
+
+
+
+
+
+dragItem('card_model'); // 設定card_model拖動div事件
+
+
+
+// 綁定函數到按鈕：toggleFullScreen => buttonToggleFullScreen
 let buttonToggleFullScreen = document.getElementById("buttonToggleFullScreen");
 buttonToggleFullScreen.addEventListener(
     "click",
@@ -171,4 +204,4 @@ buttonToggleFullScreen.addEventListener(
     },
 );
 // 設定事件，螢幕切換後必須重新置中canvas
-document.addEventListener("fullscreenchange", canvasMidVertically);
+document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
