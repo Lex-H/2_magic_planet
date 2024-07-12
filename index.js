@@ -1,4 +1,5 @@
-// --------準備所需物件及函數--------
+// --------準備所需物件、函數及變數--------
+// 正式運行遊戲在runningGame函數裡
 
 // initGame物件：初始化遊戲
 const initGame = {
@@ -44,7 +45,6 @@ function draw() {
 
 
 
-
 // 拖動div事件函數，輸入字串形式的div之ID
 function dragItem(itemID) {
     // 拖動div，成功，原始碼來自網路
@@ -78,8 +78,7 @@ fetch("gameData/output.json")
     console.log(myJson);
     const csvJson = myJson;
     // csvJson就是卡片資料陣列，在這邊使用吧。
-    // 因為非同步？的關係，只能在這裡調用，就算宣告成全域變數，在這之外的代碼直接調動不一定生效，因為非同步？還沒跑完
-    // 或者是將csvJson設定為全域變數(不加const)，然後後面要用到的地方設定計時器，網頁載入兩三秒後再讀取
+    // 因為非同步的關係，只能在這裡調用，就算宣告成全域變數，在這之外的代碼直接調動不生效，因為同步還沒跑完
 
     // 卡片產生函數：輸入卡片編號產生卡片
     function cardGenerator(number) {
@@ -172,6 +171,17 @@ function toggleFullScreen() {
       }
     }
 }
+// 切換全螢幕事件：EventToggleFullScreen，輸入button id(字串)，綁定切換螢幕事件
+function EventToggleFullScreen(buttonId) {
+  let button = document.getElementById(buttonId);
+  // 綁定函數到按鈕：toggleFullScreen => button
+  button.addEventListener(
+      "click",
+      function () {
+          toggleFullScreen();
+    },
+  );
+}
 
 
 
@@ -188,29 +198,30 @@ const openingScene = {
 initGame.init(); // 初始化
 
 async function runningGame() {
-// 請求後端取得遊戲資料Json檔gameData
+  // 請求後端取得遊戲資料Json檔gameData
   response  = await fetch("gameData/output.json");
   this.gameData = await response.json();
-  console.log("await讀取的資料：");
+  console.log("await讀取的gameData：");
   console.log(this.gameData);
 
+  
   // 所有遊戲函數放在這裡執行，因為很多地方需要
-  dragItem('card_model'); // 設定card_model拖動div事件
+
+  // 因為非同步的關係，只能在這裡調用，就算宣告成全域變數，在這之外的代碼直接調動不生效，因為同步還沒跑完，試過很多方法了，除非遇到懂得人，不然不要再花時間搞這個
+  // await只能在有標註async的函數裡使用
+  
+  // 設定card_model拖動div事件
+  dragItem('card_model'); 
+
+  // 綁定切換全螢幕事件函數到按鈕
+  EventToggleFullScreen("buttonToggleFullScreen"); 
+
+  // 設定事件，螢幕切換後必須重新置中canvas
+  document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
 
 
 
-// 綁定函數到按鈕：toggleFullScreen => buttonToggleFullScreen
-let buttonToggleFullScreen = document.getElementById("buttonToggleFullScreen");
-buttonToggleFullScreen.addEventListener(
-    "click",
-    function () {
-        toggleFullScreen();
-    },
-);
-// 設定事件，螢幕切換後必須重新置中canvas
-document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
 
-//
 
 
 
