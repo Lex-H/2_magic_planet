@@ -77,7 +77,6 @@ fetch("gameData/output.json")
   .then(function (myJson) {
     console.log(myJson);
     const csvJson = myJson;
-    test = myJson;
     // csvJson就是卡片資料陣列，在這邊使用吧。
     // 因為非同步？的關係，只能在這裡調用，就算宣告成全域變數，在這之外的代碼直接調動不一定生效，因為非同步？還沒跑完
     // 或者是將csvJson設定為全域變數(不加const)，然後後面要用到的地方設定計時器，網頁載入兩三秒後再讀取
@@ -139,8 +138,6 @@ fetch("gameData/output.json")
     cardGenerator(7);
   });
 
-// 測試在async外面用await
-console.log(test)
 
 
 // 切換全螢幕函數
