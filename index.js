@@ -34,6 +34,8 @@ let initGame = {
 
   init: function() {
     this.canvasMidVertically(); // 讓canvas垂直置中
+    // 設定事件，螢幕切換後必須重新置中canvas
+    document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
   },
 }
 
@@ -169,12 +171,7 @@ function toggleFullScreen() {
 function EventToggleFullScreen(buttonId) {
   let button = document.getElementById(buttonId);
   // 綁定函數到按鈕：toggleFullScreen => button
-  button.addEventListener(
-      "click",
-      function () {
-          toggleFullScreen();
-    },
-  );
+  button.addEventListener("click", toggleFullScreen);
 }
 function buttonToggleFullScreen() {
   // 新增按鈕標籤<button>
@@ -185,8 +182,6 @@ function buttonToggleFullScreen() {
   
   // 綁定切換全螢幕事件函數到按鈕
   EventToggleFullScreen("buttonToggleFullScreen"); 
-  // 設定事件，螢幕切換後必須重新置中canvas
-  document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
 }
 
 
@@ -200,15 +195,19 @@ let openingScene = {
       '<div id="canvas" class="canvasOpeningScene canvasWidthHeight">'+
         '<div class="flexCenter canvasWidthHeight">'+
           '<div id="titleOpeningScene">惑星祕法</div>'+
-          '<div id="startGame">開始遊戲</div>'+
+          '<div id="startGame">Start</div>'+
         '</div>'+
       '</div>'
     );
     
-    
+    document.getElementById("startGame").addEventListener("click", this.end);
+
 
     // 切換全螢幕按鈕
     buttonToggleFullScreen();    
+  },
+  end: function() {
+    document.querySelector("body").removeChild(document.getElementById("canvas"))
   }
 }
 
@@ -239,15 +238,11 @@ let runningGame = {
   
     // 設定card_model拖動div事件
     dragItem('card_model'); 
-
-
-  
     
   
     openingScene.run()
   
-  
-  
+    
   
   }
 }

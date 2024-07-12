@@ -41,14 +41,24 @@ body {
     display: flex;
     justify-content: center; /* 水平置中 */
     align-items: center;  /* 垂直置中 */
+    flex-wrap: wrap; /* 摺疊 */
 }
 
 
-
 #titleOpeningScene {
+    margin: 0 15vw; /* 為了讓flex摺疊 */
     font-size: 10vw;
     font-weight: 600;
     color: #00d9ff;
+}
+
+#startGame {
+    margin: 0 15vw; /* 為了讓flex摺疊 */
+    position: relative;
+    top: -5vw;
+    font-size: 5vw;
+    font-weight: 600;
+    color: #00ff84;
 }
 
 .absolute, .card div {
