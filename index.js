@@ -161,12 +161,11 @@ function EventToggleFullScreen(buttonId) {
 }
 
 
-
+// "" + ; 
 // 更改背景函數：輸入檔案名稱及副檔名，字串！
-// 
 function changeBackground(fileName) {
-  const img = new Image(); // Create new img element
-  img.src = "./img/backGroundScene/" + fileName; // Set source path
+  let url = "url('./img/backGroundScene/"+ fileName+"')";
+  initGame.canvas.style.backgroundImage = url;
 }
 
 
@@ -175,6 +174,9 @@ function changeBackground(fileName) {
 // 應該包含清除上個場景背景跟所有物件(圖片、文字、按鈕) / 設定場景 / 設定所有物件
 let openingScene = {
   run: function() {
+    // 初始化canvas
+    const canvasTemplate = '<div id="canvas">'
+    initGame.canvas.outerHTML = canvasTemplate;
     changeBackground("bg_openingScene.png");
   }
 }
