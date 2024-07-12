@@ -207,7 +207,9 @@ let openingScene = {
     buttonToggleFullScreen();    
   },
   end: function() {
+    // 刪除canvas，避免浪費記憶體
     document.querySelector("body").removeChild(document.getElementById("canvas"))
+    // 解除綁點事件，這裡有缺
   }
 }
 
