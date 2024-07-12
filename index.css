@@ -1,10 +1,11 @@
 /* 
-    canvasDiv及以上節點
+    1. canvas及以上節點
     不要使用 flex+justify-content: center 水平置中
     不要使用 align-items: center; 垂直置中 
     不要設定position
     因為會導致其他地方意外的Bug，例如拖動div的漂移bug
-    */
+    2. 為了RWD，所有的單位盡量以vw為主
+*/
 body {
     background-color: #f1ff88;
     /* 禁止反白文字，none = 元素及其子元素的文本不可选中。 */
@@ -12,7 +13,7 @@ body {
 }
 
 /* 
-    canvasDiv及以上節點
+    canvas及以上節點
     不要使用 flex+justify-content: center 水平置中
     不要使用 align-items: center; 垂直置中 
     不要設定position
@@ -23,9 +24,31 @@ body {
     /* 水平置中 */
     display: block;
     margin: auto;
+}
 
+.canvasWidthHeight {
     width: 90vw;
     height: 41.54vw;
+}
+
+
+.canvasOpeningScene {
+    background-image: url(img/backGroundScene/bg_openingScene.png);
+}
+
+/* div水平及垂直置中 */
+.flexCenter {
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center;  /* 垂直置中 */
+}
+
+
+
+#titleOpeningScene {
+    font-size: 10vw;
+    font-weight: 600;
+    color: #00d9ff;
 }
 
 .absolute, .card div {

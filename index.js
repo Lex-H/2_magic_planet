@@ -1,19 +1,36 @@
 // --------準備所需物件、函數及變數--------
 // 正式運行遊戲在物件裡：runningGame.run
 
-// initGame物件：初始化遊戲
+// initGame物件：初始化遊戲，設定常用屬性及方法
 let initGame = {
-  // 常用變數在這邊一次設定
-  canvas: document.getElementById("canvas"),
+  // 常用屬性，不做修改只讀取數值的，在這邊一次設定
+  // canvas會不斷修改，不能寫成屬性，乖乖地用document.getElementById吧，因為修改DOM後DOM的新值不會自動更新到JS裡面的DOM物件
+
 
   // canvas置中函數：bodyTop設定高度，讓canvas垂直置中
   canvasMidVertically: function() {
     let clientHeight = document.documentElement.scrollHeight; // 頁面高度
     let canvas = document.getElementById("canvas");
-    let bodyIop = document.getElementById("bodyTop");
+    let bodyTop = document.getElementById("bodyTop");
     let canvasHeight = canvas.offsetHeight; // canvas高度
-    bodyIop.style.height = (clientHeight-canvasHeight)/2+"px"; // 設定bodyTop高度
+    bodyTop.style.height = (clientHeight-canvasHeight)/2+"px"; // 設定bodyTop高度
   },
+
+  // 不要急著刪，新增卡牌那邊可以用
+  // 新增節點到canvas方法，傳入節點類型跟節點模板
+  // 性能較低，但是程式碼簡單，直接JS操作dom物件在放進dom很麻煩
+  addNewNodeToCanvas: function(nodeType, Template) {
+    let newDiv = document.createElement(nodeType); // 產生新的節點
+    document.getElementById("canvas").appendChild(newDiv); // 將newDiv放到canvas裡面
+    newDiv.outerHTML = Template; // 將newDiv使用outerHTML完全替換成我指定的模板
+    console.log(newDiv);
+  },
+
+  // 改變canvas方法：用新的canvasTemplate替代舊的，class="canvasOpeningScene"設定背景
+  changeCanvas: function(canvasTemplate) {
+    document.getElementById("canvas").outerHTML = canvasTemplate;
+  },
+  
 
   init: function() {
     this.canvasMidVertically(); // 讓canvas垂直置中
@@ -159,13 +176,17 @@ function EventToggleFullScreen(buttonId) {
     },
   );
 }
-
-
-// "" + ; 
-// 更改背景函數：輸入檔案名稱及副檔名，字串！
-function changeBackground(fileName) {
-  let url = "url('./img/backGroundScene/"+ fileName+"')";
-  initGame.canvas.style.backgroundImage = url;
+function buttonToggleFullScreen() {
+  // 新增按鈕標籤<button>
+  let Template = '<button id="buttonToggleFullScreen" class="absolute">切換全螢幕</button>'
+  let newDiv = document.createElement("button"); // 產生新的button
+  document.getElementById('canvas').appendChild(newDiv); // 將newDiv放到canvas裡面
+  newDiv.outerHTML = Template; // 將newDiv使用outerHTML完全替換成我指定的模板 
+  
+  // 綁定切換全螢幕事件函數到按鈕
+  EventToggleFullScreen("buttonToggleFullScreen"); 
+  // 設定事件，螢幕切換後必須重新置中canvas
+  document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
 }
 
 
@@ -173,11 +194,21 @@ function changeBackground(fileName) {
 // 開始畫面物件
 // 應該包含清除上個場景背景跟所有物件(圖片、文字、按鈕) / 設定場景 / 設定所有物件
 let openingScene = {
-  run: function() {
-    // 初始化canvas
-    const canvasTemplate = '<div id="canvas">'
-    initGame.canvas.outerHTML = canvasTemplate;
-    changeBackground("bg_openingScene.png");
+    run: function() {
+    // 改變canvas方法：用新的canvasTemplate HTML替代舊的，用css設定外觀
+    initGame.changeCanvas(
+      '<div id="canvas" class="canvasOpeningScene canvasWidthHeight">'+
+        '<div class="flexCenter canvasWidthHeight">'+
+          '<div id="titleOpeningScene">惑星祕法</div>'+
+          '<div id="startGame">開始遊戲</div>'+
+        '</div>'+
+      '</div>'
+    );
+    
+    
+
+    // 切換全螢幕按鈕
+    buttonToggleFullScreen();    
   }
 }
 
@@ -211,10 +242,7 @@ let runningGame = {
 
 
   
-    // 綁定切換全螢幕事件函數到按鈕
-    EventToggleFullScreen("buttonToggleFullScreen"); 
-    // 設定事件，螢幕切換後必須重新置中canvas
-    document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
+    
   
     openingScene.run()
   
