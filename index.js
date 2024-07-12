@@ -1,10 +1,10 @@
 // --------準備所需物件、函數及變數--------
-// 正式運行遊戲在runningGame函數裡
+// 正式運行遊戲在物件裡：runningGame.run
 
 // initGame物件：初始化遊戲
-const initGame = {
+let initGame = {
+  // 常用變數在這邊一次設定
   canvas: document.getElementById("canvas"),
-  gameData: "等待讀取gameData",
 
   // canvas置中函數：bodyTop設定高度，讓canvas垂直置中
   canvasMidVertically: function() {
@@ -20,27 +20,6 @@ const initGame = {
     canvas.height = window.innerWidth*0.4154; // 畫布高 = 視窗內的高
     this.canvasMidVertically(); // 讓canvas垂直置中
   },
-}
-
-
-
-// 繪製圖案函數範本
-function draw() {
-  const canvas = document.getElementById("canvas");
-  if (canvas.getContext) {
-    const ctx = canvas.getContext("2d");
-
-    // ctx.fillStyle = "rgb(200 0 0)";
-    // ctx.fillRect(10, 10, 50, 50);
-
-    // ctx.fillStyle = "rgb(0 0 200 / 50%)";
-    // ctx.fillRect(30, 30, 50, 50);
-
-
-    // ctx.fillRect(25, 25, 100, 100);
-    // ctx.clearRect(45, 45, 60, 60);
-    // ctx.strokeRect(50, 50, 50, 50);
-  }
 }
 
 
@@ -184,11 +163,42 @@ function EventToggleFullScreen(buttonId) {
 }
 
 
+// ！！！搞清楚為何canvas會導致崩潰前不要再用了！！！
+
+// 更改背景函數：輸入檔案名稱及副檔名，字串！
+// 參考：https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
+// function changeBackground(fileName) {
+//   const ctx = initGame.canvas.getContext("2d");
+//   const img = new Image(); // Create new img element
+  
+//   img.addEventListener("load", () => {
+//     ctx.drawImage(img, 0, 0);
+//   });
+
+//   img.src = "./img/backGroundScene/" + fileName; // Set source path
+// }
+
+
+
+// function drawText() {
+//   const ctx = document.getElementById("canvas").getContext("2d");
+//   ctx.font = "48px serif";
+//   ctx.fillText("Hello world", 10, 50);
+// }
+
+
 
 // 開始畫面物件
 // 應該包含清除canvas，設定場景，設定按鈕
-const openingScene = {
+let openingScene = {
+  run: function() {
+    // 畫出圖片(含文字)好像會導致內存崩潰，可以查查看為什麼
+    // 參考：https://mp.weixin.qq.com/s/hFG1ypsEckVIZb5OCv0H7g
 
+    // ！！！搞清楚為何canvas會導致崩潰前不要再用了！！！
+    // changeBackground("bg_openingScene.png");
+    // drawText();
+  }
 }
 
 
@@ -197,37 +207,44 @@ const openingScene = {
 
 initGame.init(); // 初始化
 
-async function runningGame() {
-  // 請求後端取得遊戲資料Json檔gameData
-  response  = await fetch("gameData/output.json");
-  this.gameData = await response.json();
-  console.log("await讀取的gameData：");
-  console.log(this.gameData);
+
+let runningGame = {
+  gameData: "遊戲資料等待讀取",
+  run: async function() {
+    // 請求後端取得遊戲資料Json檔gameData
+    // 所有需要await fetch的都在這邊執行，方便管理
+    response  = await fetch("gameData/output.json");
+    this.gameData = await response.json();
+    
+    console.log("開始執行async/await底下的代碼")
+    console.log("await讀取的gameData：");
+    console.log(this.gameData);
+    
+    // ----------所有遊戲中函數及操作在這裡執行----------
+  
+    // 因為很多地方需要gameData，而且非同步的關係，只能在這裡調用gameData
+    // 就算宣告成全域變數，在這之外的代碼直接調動不生效，因為同步還沒跑完，試過很多方法了，await只能在有標註async的函數裡使用
+    // 除非遇到懂得人問她，不然不要再花時間搞這個！！！！！
+  
+    // 設定card_model拖動div事件
+    dragItem('card_model'); 
+
 
   
-  // 所有遊戲函數放在這裡執行，因為很多地方需要
-
-  // 因為非同步的關係，只能在這裡調用，就算宣告成全域變數，在這之外的代碼直接調動不生效，因為同步還沒跑完，試過很多方法了，除非遇到懂得人，不然不要再花時間搞這個
-  // await只能在有標註async的函數裡使用
+    // 綁定切換全螢幕事件函數到按鈕
+    EventToggleFullScreen("buttonToggleFullScreen"); 
+    // 設定事件，螢幕切換後必須重新置中canvas
+    document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
   
-  // 設定card_model拖動div事件
-  dragItem('card_model'); 
-
-  // 綁定切換全螢幕事件函數到按鈕
-  EventToggleFullScreen("buttonToggleFullScreen"); 
-
-  // 設定事件，螢幕切換後必須重新置中canvas
-  document.addEventListener("fullscreenchange", initGame.canvasMidVertically);
-
-
-
-
-
-
-
-
+    openingScene.run()
+  
+  
+  
+  
+  }
 }
-runningGame();
+
+runningGame.run();
 
 
 console.log("index.js同步運行完成")
