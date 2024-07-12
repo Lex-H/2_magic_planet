@@ -19,13 +19,14 @@ body {
     因為會導致其他地方意外的Bug，例如拖動div的漂移bug
 */
 
-/* <canvas>的寬高不要用css設定，直接在js裡改<canvas>的寬高屬性，避免Bug */
 #canvas {
     /* 水平置中 */
     display: block;
     margin: auto;
 
-    background-color: #333333; /* 這裡可能有bug，canvas可能有別的方式設定背景 */
+    width: 90vw;
+    height: 41.54vw;
+    background-color: #333333; 
 }
 
 .absolute, .card div {

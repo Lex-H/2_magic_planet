@@ -16,8 +16,6 @@ let initGame = {
   },
 
   init: function() {
-    canvas.width = window.innerWidth*0.9; // 畫布寬 = 視窗內的寬
-    canvas.height = window.innerWidth*0.4154; // 畫布高 = 視窗內的高
     this.canvasMidVertically(); // 讓canvas垂直置中
   },
 }
@@ -96,8 +94,8 @@ fetch("gameData/output.json")
     // 產生新的div
     let newDiv = document.createElement("div");
 
-    // 將newDiv放到canvasDiv裡面
-    document.getElementById('canvasDiv').appendChild(newDiv);
+    // 將newDiv放到canvas裡面
+    document.getElementById('canvas').appendChild(newDiv);
 
     // 將newDiv使用outerHTML完全替換成我指定的模板 
     newDiv.outerHTML = cardTemplate;
@@ -163,41 +161,21 @@ function EventToggleFullScreen(buttonId) {
 }
 
 
-// ！！！搞清楚為何canvas會導致崩潰前不要再用了！！！
 
 // 更改背景函數：輸入檔案名稱及副檔名，字串！
-// 參考：https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
+// 
 function changeBackground(fileName) {
-  const ctx = initGame.canvas.getContext("2d");
   const img = new Image(); // Create new img element
-  
-  img.addEventListener("load", () => {
-    ctx.drawImage(img, 0, 0);
-  });
-
   img.src = "./img/backGroundScene/" + fileName; // Set source path
 }
 
 
 
-// function drawText() {
-//   const ctx = document.getElementById("canvas").getContext("2d");
-//   ctx.font = "48px serif";
-//   ctx.fillText("Hello world", 10, 50);
-// }
-
-
-
 // 開始畫面物件
-// 應該包含清除canvas，設定場景，設定按鈕
+// 應該包含清除上個場景背景跟所有物件(圖片、文字、按鈕) / 設定場景 / 設定所有物件
 let openingScene = {
   run: function() {
-    // 畫出圖片(含文字)好像會導致內存崩潰，可以查查看為什麼
-    // 參考：https://mp.weixin.qq.com/s/hFG1ypsEckVIZb5OCv0H7g
-
-    // ！！！搞清楚為何canvas會導致崩潰前不要再用了！！！
     changeBackground("bg_openingScene.png");
-    // drawText();
   }
 }
 
