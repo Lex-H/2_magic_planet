@@ -167,16 +167,16 @@ function EventToggleFullScreen(buttonId) {
 
 // 更改背景函數：輸入檔案名稱及副檔名，字串！
 // 參考：https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
-// function changeBackground(fileName) {
-//   const ctx = initGame.canvas.getContext("2d");
-//   const img = new Image(); // Create new img element
+function changeBackground(fileName) {
+  const ctx = initGame.canvas.getContext("2d");
+  const img = new Image(); // Create new img element
   
-//   img.addEventListener("load", () => {
-//     ctx.drawImage(img, 0, 0);
-//   });
+  img.addEventListener("load", () => {
+    ctx.drawImage(img, 0, 0);
+  });
 
-//   img.src = "./img/backGroundScene/" + fileName; // Set source path
-// }
+  img.src = "./img/backGroundScene/" + fileName; // Set source path
+}
 
 
 
@@ -196,7 +196,7 @@ let openingScene = {
     // 參考：https://mp.weixin.qq.com/s/hFG1ypsEckVIZb5OCv0H7g
 
     // ！！！搞清楚為何canvas會導致崩潰前不要再用了！！！
-    // changeBackground("bg_openingScene.png");
+    changeBackground("bg_openingScene.png");
     // drawText();
   }
 }
