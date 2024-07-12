@@ -139,6 +139,7 @@ fetch("gameData/output.json")
     cardGenerator(7);
   });
 
+// 測試在async外面用await
 console.log(test)
 
 
