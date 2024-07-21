@@ -1,0 +1,5 @@
+如何使用parseCsv
+	1. 在2_magic_planet開啟powershell
+	2. 輸入環境變數：
+	fnm env --use-on-cd | Out-String | Invoke-Expression
+    3. node parseCsv/parseCsv.js
